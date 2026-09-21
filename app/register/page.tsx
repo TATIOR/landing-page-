@@ -2,25 +2,13 @@
 import { FormEvent, useState } from "react";
 
 export default function Register(){
- const [loading,setLoading]=useState(false),[googleLoading,setGoogleLoading]=useState(false),[msg,setMsg]=useState(""),[ok,setOk]=useState(false);
+ const [loading,setLoading]=useState(false),[msg,setMsg]=useState(""),[ok,setOk]=useState(false);
  async function submit(e:FormEvent<HTMLFormElement>){
   e.preventDefault();setLoading(true);setMsg("");setOk(false);
   const form=new FormData(e.currentTarget);const payload=Object.fromEntries(form.entries());
   if(payload.password!==payload.confirmPassword){setMsg("Passwords do not match.");setLoading(false);return;}
   try{const res=await fetch("/api/register",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)});const data=await res.json();if(!res.ok)throw new Error(data.error||"Registration failed.");setOk(true);setMsg("Account created successfully.");e.currentTarget.reset();}
   catch(err:any){setMsg(err.message||"Registration failed.");}finally{setLoading(false)}
- }
- async function google(){
-  setGoogleLoading(true);setMsg("");
-  try{
-   const { createClient } = await import("@/utils/supabase/client");
-   const supabase=createClient();
-   const { error }=await supabase.auth.signInWithOAuth({
-    provider:"google",
-    options:{redirectTo:`${window.location.origin}/auth/callback`}
-   });
-   if(error)throw error;
-  }catch(err:any){setMsg(err.message||"Google sign-in failed.");setGoogleLoading(false);}
  }
  return <main className="register-page">
   <div className="register-shell">
@@ -34,10 +22,6 @@ export default function Register(){
     </section>
     <section className="register-card">
      <div className="register-card-top"><div className="eyebrow">JOIN THE ACADEMY</div><h2>Create your account</h2><p>It takes less than a minute.</p></div>
-     <button type="button" className="google-button" onClick={google} disabled={googleLoading}>
-      <span className="google-icon">G</span>{googleLoading?"Connecting…":"Continue with Google"}
-     </button>
-     <div className="or-divider"><span>or continue with email</span></div>
      <form onSubmit={submit}>
       <div className="form-grid">
        <label>Full name<input name="name" required minLength={2} placeholder="Your name"/></label>
