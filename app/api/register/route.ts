@@ -7,7 +7,7 @@ export async function POST(req:Request){
  try{
   const body=await req.json(); const name=String(body.name||"").trim(); const email=String(body.email||"").trim().toLowerCase(); const phone=String(body.phone||"").trim(); const password=String(body.password||""); const marketingConsent=body.marketingConsent===true||body.marketingConsent==="true";
   if(name.length<2||!validEmail(email)||password.length<8||!marketingConsent)return NextResponse.json({error:"Please complete all required fields and accept the communication consent."},{status:400});
-  const url=process.env.SUPABASE_URL, key=process.env.SUPABASE_SERVICE_ROLE_KEY;
+  const url=process.env.SUPABASE_URL, key=process.env.SUPABASE_SECRET_KEY;
   if(!url||!key)return NextResponse.json({error:"Registration database is not configured yet."},{status:503});
   const password_hash=hashPassword(password); const user={name,email,phone:phone||null,password_hash,marketing_consent:marketingConsent,marketing_consent_at:new Date().toISOString(),source:"tatior.com"};
   const response=await fetch(`${url}/rest/v1/ita_users`,{method:"POST",headers:{apikey:key,Authorization:`Bearer ${key}`,"Content-Type":"application/json",Prefer:"return=minimal"},body:JSON.stringify(user)});
