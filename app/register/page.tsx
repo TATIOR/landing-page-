@@ -13,10 +13,13 @@ export default function Register(){
  async function google(){
   setGoogleLoading(true);setMsg("");
   try{
-   const res=await fetch("/api/auth/google");
-   const data=await res.json();
-   if(!res.ok||!data.url)throw new Error(data.error||"Google sign-in is not configured yet.");
-   window.location.href=data.url;
+   const { createClient } = await import("@/utils/supabase/client");
+   const supabase=createClient();
+   const { error }=await supabase.auth.signInWithOAuth({
+    provider:"google",
+    options:{redirectTo:`${window.location.origin}/auth/callback`}
+   });
+   if(error)throw error;
   }catch(err:any){setMsg(err.message||"Google sign-in failed.");setGoogleLoading(false);}
  }
  return <main className="register-page">
