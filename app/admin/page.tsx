@@ -7,7 +7,7 @@ const defaultConfig={heroTitle:"Stop chasing trades.",heroAccent:"Build a tradin
 {name:"Premium Coaching",price:"$497",description:"High-touch coaching for traders who want deeper feedback and accountability.",features:["Everything in Base","Personalized trade reviews","Direct coaching access","Execution feedback","Advanced accountability"],cta:"Get Premium Coaching",href:"#",featured:false}]};
 
 export default function Admin(){
- const[logged,setLogged]=useState(false),[email,setEmail]=useState("admin@institutionaltradingacademy.com"),[password,setPassword]=useState(""),[loginMsg,setLoginMsg]=useState(""),[tab,setTab]=useState("dashboard");
+ const[logged,setLogged]=useState(false),[email,setEmail]=useState("tatiorstore@gmail.com"),[password,setPassword]=useState(""),[loginMsg,setLoginMsg]=useState(""),[tab,setTab]=useState("dashboard");
  const[cfg,setCfg]=useState<any>(defaultConfig),[customers,setCustomers]=useState<any[]>([]),[stats,setStats]=useState({total:0,consented:0,today:0}),[loading,setLoading]=useState(true),[msg,setMsg]=useState("");
  useEffect(()=>{try{const s=localStorage.getItem("itaSiteConfig");if(s)setCfg({...defaultConfig,...JSON.parse(s)});}catch{};loadCustomers();},[]);
  async function loadCustomers(){
