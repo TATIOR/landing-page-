@@ -12,6 +12,6 @@ export async function requireAdmin(){
  try{
   if(!timingSafeEqual(Buffer.from(signature),Buffer.from(expected)))return false;
   const data=JSON.parse(Buffer.from(value,"base64url").toString("utf8"));
-  return data.email==="admin@institutionaltradingacademy.com"&&Number(data.exp)>Date.now();
+  return data.email==="tatiorstore@gmail.com"&&Number(data.exp)>Date.now();
  }catch{return false;}
 }
