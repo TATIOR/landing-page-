@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { createHmac, timingSafeEqual } from "crypto";
 
-const EMAIL="admin@institutionaltradingacademy.com";
+const EMAIL="tatiorstore@gmail.com";
 function sign(value:string,secret:string){return createHmac("sha256",secret).update(value).digest("hex");}
 
 export async function POST(req:Request){
