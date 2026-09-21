@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { createHash, randomBytes, scryptSync } from "crypto";
+import { randomBytes, scryptSync } from "crypto";
 
 function hashPassword(password:string){const salt=randomBytes(16).toString("hex");const hash=scryptSync(password,salt,64).toString("hex");return `${salt}:${hash}`;}
 function validEmail(email:string){return /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email);}
@@ -10,7 +10,7 @@ export async function POST(req:Request){
   const url=process.env.SUPABASE_URL, key=process.env.SUPABASE_SERVICE_ROLE_KEY;
   if(!url||!key)return NextResponse.json({error:"Registration database is not configured yet."},{status:503});
   const password_hash=hashPassword(password); const user={name,email,phone:phone||null,password_hash,marketing_consent:marketingConsent,marketing_consent_at:new Date().toISOString(),source:"tatior.com"};
-  const response=await fetch(`${url}/rest/v1/ita_users`,{method:"POST",headers:{apikey:key,Authorization:`Bearer ${key}","Content-Type":"application/json",Prefer:"return=minimal"},body:JSON.stringify(user)});
+  const response=await fetch(`${url}/rest/v1/ita_users`,{method:"POST",headers:{apikey:key,Authorization:`Bearer ${key}`,"Content-Type":"application/json",Prefer:"return=minimal"},body:JSON.stringify(user)});
   if(response.status===409)return NextResponse.json({error:"An account with this email already exists."},{status:409});
   if(!response.ok){const detail=await response.text();console.error("Supabase registration error",detail);return NextResponse.json({error:"Could not create the account."},{status:500});}
   return NextResponse.json({ok:true},{status:201});
