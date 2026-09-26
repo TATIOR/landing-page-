@@ -5,8 +5,8 @@ Next.js landing page for Institutional Trading Academy.
 ## Offers
 
 - Digital Starter — $5
-- Base Coaching — $147
-- Premium Coaching — $497
+- 3-Month Mentorship — $147
+- 12-Month Mentorship — $497
 
 ## Checkout
 
