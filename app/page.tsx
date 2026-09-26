@@ -54,35 +54,35 @@ const defaults: Config = {
       featured: false,
     },
     {
-      name: "Base Coaching",
+      name: "3-Month Mentorship",
       price: "$147",
       description:
-        "A structured coaching program for traders who want a repeatable process.",
+        "A structured 3-month mentorship program built around trading education, risk management, psychology and disciplined execution.",
       features: [
         "Complete trading framework",
         "Market structure & liquidity",
         "Risk management system",
         "Trading psychology",
         "Community access",
-        "Coaching sessions",
+        "Structured 3-month learning path",
       ],
-      cta: "Join Base Coaching",
+      cta: "Join 3-Month Mentorship",
       href: "#",
       featured: true,
     },
     {
-      name: "Premium Coaching",
+      name: "12-Month Mentorship",
       price: "$497",
       description:
-        "High-touch coaching for traders who want deeper feedback and accountability.",
+        "A long-term 12-month mentorship program for traders who want more time to develop, practice and refine their process.",
       features: [
-        "Everything in Base",
-        "Personalized trade reviews",
-        "Direct coaching access",
-        "Execution feedback",
-        "Advanced accountability",
+        "Everything in 3-Month Mentorship",
+        "Extended 12-month learning path",
+        "Ongoing educational content",
+        "Trading psychology development",
+        "Risk management development",
       ],
-      cta: "Get Premium Coaching",
+      cta: "Get 12-Month Mentorship",
       href: "#",
       featured: false,
     },
@@ -97,6 +97,10 @@ const faqs = [
   [
     "Do I need to buy all three offers?",
     "No. The $5 product is a standalone entry product. Coaching is optional.",
+  ],
+  [
+    "How long are the mentorship programs?",
+    "$147 gives you access to the 3-month mentorship program. $497 gives you access to the 12-month mentorship program.",
   ],
   [
     "Where do I receive my product?",
@@ -343,7 +347,7 @@ export default function Home() {
         <div className="container cta">
           <div className="eyebrow">YOUR NEXT MOVE</div>
           <h2>Build the process before you chase the result.</h2>
-          <p>Start with the $5 digital product, or go directly into coaching.</p>
+          <p>Start with the $5 digital product, or join a structured mentorship program.</p>
           <a className="button primary" href="#offers">
             View Programs
           </a>
