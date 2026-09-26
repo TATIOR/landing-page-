@@ -40,7 +40,7 @@ const defaults: Config = {
   offers: [
     {
       name: "Digital Starter",
-      price: "$5",
+      price: "$10",
       description:
         "A practical introduction to structured trading, risk management and psychology.",
       features: [
@@ -49,7 +49,7 @@ const defaults: Config = {
         "Core market-structure concepts",
         "Instant digital access",
       ],
-      cta: "Get the $5 Product",
+      cta: "Get the $10 Product",
       href: "#",
       featured: false,
     },
@@ -347,7 +347,7 @@ export default function Home() {
         <div className="container cta">
           <div className="eyebrow">YOUR NEXT MOVE</div>
           <h2>Build the process before you chase the result.</h2>
-          <p>Start with the $5 digital product, or join a structured mentorship program.</p>
+          <p>Start with the $10 digital product, or join a structured mentorship program.</p>
           <a className="button primary" href="#offers">
             View Programs
           </a>
