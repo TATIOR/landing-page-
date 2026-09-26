@@ -23,7 +23,7 @@ type Config = {
   heroCopy: string;
   audience: string;
   experience: string;
-  telegramUrl: string;
+  discordUrl: string;
   certificates: Certificate[];
   offers: Offer[];
 };
@@ -35,7 +35,7 @@ const defaults: Config = {
     "Learn market structure, liquidity, risk management and trading psychology through a structured approach designed to help you execute with discipline.",
   audience: "14K+",
   experience: "3+",
-  telegramUrl: "https://t.me/",
+  discordUrl: "https://discord.gg/neGYW7UTC",
   certificates: [],
   offers: [
     {
@@ -136,56 +136,24 @@ export default function Home() {
         </a>
 
         <div className="nav-actions">
-          <a className="nav-link" href="/about">
-            Who I Am
+          <a className="nav-link" href="/about">Who I Am</a>
+          <a className="nav-link" href="/register">Create Account</a>
+          <a className="nav-link" href="#offers">Programs</a>
+          <a className="button telegram-button" href={cfg.discordUrl} target="_blank" rel="noreferrer">
+            Join Our Discord
           </a>
-          <a className="nav-link" href="/register">
-            Create Account
-          </a>
-          <a className="nav-link" href="#offers">
-            Programs
-          </a>
-          <a
-            className="button telegram-button"
-            href={cfg.telegramUrl}
-            target="_blank"
-            rel="noreferrer"
-          >
-            Join Free Telegram
-          </a>
-
-          <button
-            className="mobile-menu-button"
-            type="button"
-            aria-label={menuOpen ? "Close menu" : "Open menu"}
-            aria-expanded={menuOpen}
-            onClick={() => setMenuOpen((open) => !open)}
-          >
-            <span />
-            <span />
-            <span />
+          <button className="mobile-menu-button" type="button" aria-label={menuOpen ? "Close menu" : "Open menu"} aria-expanded={menuOpen} onClick={() => setMenuOpen((open) => !open)}>
+            <span /><span /><span />
           </button>
         </div>
 
         {menuOpen && (
           <div className="mobile-menu">
-            <a href="/about" onClick={() => setMenuOpen(false)}>
-              Who I Am
-            </a>
-            <a href="/register" onClick={() => setMenuOpen(false)}>
-              Create Account
-            </a>
-            <a href="#offers" onClick={() => setMenuOpen(false)}>
-              Programs
-            </a>
-            <a
-              className="mobile-telegram"
-              href={cfg.telegramUrl}
-              target="_blank"
-              rel="noreferrer"
-              onClick={() => setMenuOpen(false)}
-            >
-              Join Free Telegram
+            <a href="/about" onClick={() => setMenuOpen(false)}>Who I Am</a>
+            <a href="/register" onClick={() => setMenuOpen(false)}>Create Account</a>
+            <a href="#offers" onClick={() => setMenuOpen(false)}>Programs</a>
+            <a className="mobile-telegram" href={cfg.discordUrl} target="_blank" rel="noreferrer" onClick={() => setMenuOpen(false)}>
+              Join Our Discord
             </a>
           </div>
         )}
@@ -193,83 +161,36 @@ export default function Home() {
 
       <section className="hero container">
         <div className="eyebrow">INSTITUTIONAL TRADING ACADEMY</div>
-        <h1>
-          {cfg.heroTitle}
-          <br />
-          <span>{cfg.heroAccent}</span>
-        </h1>
+        <h1>{cfg.heroTitle}<br /><span>{cfg.heroAccent}</span></h1>
         <p className="hero-copy">{cfg.heroCopy}</p>
-
         <div className="hero-actions">
-          <a className="button primary" href="#offers">
-            Explore the Programs
-          </a>
-          <a className="button ghost" href="#method">
-            See the Method
-          </a>
+          <a className="button primary" href="#offers">Explore the Programs</a>
+          <a className="button ghost" href="#method">See the Method</a>
         </div>
-
         <div className="proof">
-          <div>
-            <strong>{cfg.audience}</strong>
-            <span>social audience</span>
-          </div>
-          <div>
-            <strong>{cfg.experience}</strong>
-            <span>years trading experience</span>
-          </div>
-          <div>
-            <strong>100%</strong>
-            <span>focus on process</span>
-          </div>
+          <div><strong>{cfg.audience}</strong><span>social audience</span></div>
+          <div><strong>{cfg.experience}</strong><span>years trading experience</span></div>
+          <div><strong>100%</strong><span>focus on process</span></div>
         </div>
       </section>
 
       <section className="section" id="about">
         <div className="container two-col">
+          <div><div className="eyebrow">WHO I AM</div><h2>Trader since 2022. Funded since 2023.</h2></div>
           <div>
-            <div className="eyebrow">WHO I AM</div>
-            <h2>Trader since 2022. Funded since 2023.</h2>
-          </div>
-          <div>
-            <p className="hero-copy">
-              I started my trading journey in 2022, studying price action,
-              market structure and the psychology behind execution. In 2023, I
-              began trading funded accounts and have gone through multiple
-              prop-firm programs and evaluations.
-            </p>
-            <p className="hero-copy">
-              Over time, the focus became less about finding another strategy
-              and more about building a repeatable process: controlled risk,
-              patience, journaling and disciplined execution. Institutional
-              Trading Academy was created from that journey to help other
-              traders develop the same foundation.
-            </p>
-            <a className="button ghost" href="/about">
-              Read My Full Story
-            </a>
+            <p className="hero-copy">I started my trading journey in 2022, studying price action, market structure and the psychology behind execution. In 2023, I began trading funded accounts and have gone through multiple prop-firm programs and evaluations.</p>
+            <p className="hero-copy">Over time, the focus became less about finding another strategy and more about building a repeatable process: controlled risk, patience, journaling and disciplined execution. Institutional Trading Academy was created from that journey to help other traders develop the same foundation.</p>
+            <a className="button ghost" href="/about">Read My Full Story</a>
           </div>
         </div>
       </section>
 
       <section className="section muted" id="method">
         <div className="container two-col">
-          <div>
-            <div className="eyebrow">THE REAL PROBLEM</div>
-            <h2>Most traders don&apos;t need another random strategy.</h2>
-          </div>
+          <div><div className="eyebrow">THE REAL PROBLEM</div><h2>Most traders don&apos;t need another random strategy.</h2></div>
           <div className="problem-list">
-            {[
-              "Overtrading after a loss",
-              "Risking too much on one idea",
-              "Changing strategies every week",
-              "Chasing payouts instead of process",
-              "Trading without a repeatable plan",
-            ].map((item) => (
-              <div className="problem" key={item}>
-                <span>×</span>
-                {item}
-              </div>
+            {["Overtrading after a loss","Risking too much on one idea","Changing strategies every week","Chasing payouts instead of process","Trading without a repeatable plan"].map((item) => (
+              <div className="problem" key={item}><span>×</span>{item}</div>
             ))}
           </div>
         </div>
@@ -277,26 +198,10 @@ export default function Home() {
 
       <section className="section">
         <div className="container">
-          <div className="eyebrow">THE FRAMEWORK</div>
-          <h2>A system built around six pillars.</h2>
-
+          <div className="eyebrow">THE FRAMEWORK</div><h2>A system built around six pillars.</h2>
           <div className="pillars">
-            {[
-              "Market Structure",
-              "Liquidity & Price Action",
-              "Entries & Execution",
-              "Risk Management",
-              "Trading Psychology",
-              "Journaling & Review",
-            ].map((item, index) => (
-              <div className="pillar" key={item}>
-                <span>{String(index + 1).padStart(2, "0")}</span>
-                <h3>{item}</h3>
-                <p>
-                  Understand the principle, define the rules and execute
-                  consistently.
-                </p>
-              </div>
+            {["Market Structure","Liquidity & Price Action","Entries & Execution","Risk Management","Trading Psychology","Journaling & Review"].map((item, index) => (
+              <div className="pillar" key={item}><span>{String(index + 1).padStart(2, "0")}</span><h3>{item}</h3><p>Understand the principle, define the rules and execute consistently.</p></div>
             ))}
           </div>
         </div>
@@ -304,73 +209,38 @@ export default function Home() {
 
       <section className="section muted" id="offers">
         <div className="container">
-          <div className="eyebrow">CHOOSE YOUR LEVEL</div>
-          <h2>Start where you are. Go deeper when you&apos;re ready.</h2>
-
+          <div className="eyebrow">CHOOSE YOUR LEVEL</div><h2>Start where you are. Go deeper when you&apos;re ready.</h2>
           <div className="offers">
             {cfg.offers.map((offer) => (
-              <article
-                className={offer.featured ? "offer featured" : "offer"}
-                key={offer.name}
-              >
+              <article className={offer.featured ? "offer featured" : "offer"} key={offer.name}>
                 {offer.featured && <div className="badge">MOST POPULAR</div>}
-                <div className="offer-name">{offer.name}</div>
-                <div className="price">{offer.price}</div>
-                <p>{offer.description}</p>
-
-                <ul>
-                  {offer.features.map((feature) => (
-                    <li key={feature}>✓ {feature}</li>
-                  ))}
-                </ul>
-
-                <a
-                  className={
-                    offer.featured ? "button primary full" : "button ghost full"
-                  }
-                  href={offer.href}
-                >
-                  {offer.cta}
-                </a>
+                <div className="offer-name">{offer.name}</div><div className="price">{offer.price}</div><p>{offer.description}</p>
+                <ul>{offer.features.map((feature) => <li key={feature}>✓ {feature}</li>)}</ul>
+                <a className={offer.featured ? "button primary full" : "button ghost full"} href={offer.href}>{offer.cta}</a>
               </article>
             ))}
           </div>
-
-          <p className="checkout-note">
-            All purchases are completed through Chariow. Product links can be
-            changed from the Admin panel.
-          </p>
+          <p className="checkout-note">All purchases are completed through Chariow. Product links can be changed from the Admin panel.</p>
         </div>
       </section>
 
       <section className="section">
         <div className="container cta">
-          <div className="eyebrow">YOUR NEXT MOVE</div>
-          <h2>Build the process before you chase the result.</h2>
+          <div className="eyebrow">YOUR NEXT MOVE</div><h2>Build the process before you chase the result.</h2>
           <p>Start with the $10 digital product, or join a structured mentorship program.</p>
-          <a className="button primary" href="#offers">
-            View Programs
-          </a>
+          <a className="button primary" href="#offers">View Programs</a>
         </div>
       </section>
 
       <section className="section muted">
         <div className="container faq">
-          <div className="eyebrow">FAQ</div>
-          <h2>Questions before you start.</h2>
-
-          {faqs.map(([question, answer]) => (
-            <details key={question}>
-              <summary>{question}</summary>
-              <p>{answer}</p>
-            </details>
-          ))}
+          <div className="eyebrow">FAQ</div><h2>Questions before you start.</h2>
+          {faqs.map(([question, answer]) => <details key={question}><summary>{question}</summary><p>{answer}</p></details>)}
         </div>
       </section>
 
       <footer className="footer container">
-        <span>© {new Date().getFullYear()} Institutional Trading Academy</span>
-        <span>Education • Process • Discipline</span>
+        <span>© {new Date().getFullYear()} Institutional Trading Academy</span><span>Education • Process • Discipline</span>
       </footer>
     </main>
   );
