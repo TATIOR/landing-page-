@@ -20,7 +20,7 @@ type SiteConfig = {
   heroCopy: string;
   audience: string;
   experience: string;
-  telegramUrl: string;
+  discordUrl: string;
   certificates: Certificate[];
   offers: Offer[];
 };
@@ -31,7 +31,7 @@ const defaultConfig: SiteConfig = {
   heroCopy: "Learn market structure, liquidity, risk management and trading psychology through a structured approach designed to help you execute with discipline.",
   audience: "14K+",
   experience: "3+",
-  telegramUrl: "https://t.me/",
+  discordUrl: "https://discord.gg/neGYW7UTC",
   certificates: [],
   offers: [
     { name: "Digital Starter", price: "$10", description: "A practical introduction to structured trading, risk management and psychology.", features: ["Trading psychology guide", "Risk management framework", "Core market-structure concepts", "Instant digital access"], cta: "Get the $10 Product", href: "#", featured: false },
@@ -175,7 +175,7 @@ export default function Admin() {
       </section>
 
       <section className="admin-section"><h2>Community &amp; Credentials</h2>
-        <label>Free Telegram URL<input value={cfg.telegramUrl || ""} onChange={e => setCfg({ ...cfg, telegramUrl: e.target.value })} /></label>
+        <label>Discord Server URL<input value={cfg.discordUrl || ""} onChange={e => setCfg({ ...cfg, discordUrl: e.target.value })} /></label>
         <p className="security-note">Upload your certificate, payout proof or trading milestone. JPG, PNG, WEBP and PDF are supported up to 8 MB.</p>
         {cfg.certificates.map((c, i) => <div className="edit-offer" key={i}>
           <h3>Proof {i + 1}</h3>
