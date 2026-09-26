@@ -96,7 +96,7 @@ const faqs = [
   ],
   [
     "Do I need to buy all three offers?",
-    "No. The $5 product is a standalone entry product. Mentorship is optional.",
+    "No. The $10 product is a standalone entry product. Mentorship is optional.",
   ],
   [
     "How long are the mentorship programs?",
