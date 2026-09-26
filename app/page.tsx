@@ -82,7 +82,7 @@ const defaults: Config = {
         "Trading psychology development",
         "Risk management development",
       ],
-      cta: "Get 12-Month Mentorship",
+      cta: "Join 12-Month Mentorship",
       href: "#",
       featured: false,
     },
@@ -96,7 +96,7 @@ const faqs = [
   ],
   [
     "Do I need to buy all three offers?",
-    "No. The $5 product is a standalone entry product. Coaching is optional.",
+    "No. The $5 product is a standalone entry product. Mentorship is optional.",
   ],
   [
     "How long are the mentorship programs?",
