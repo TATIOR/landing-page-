@@ -54,7 +54,7 @@ const defaults = {
         "Trading psychology development",
         "Risk management development",
       ],
-      cta: "Get 12-Month Mentorship",
+      cta: "Join 12-Month Mentorship",
       href: "#",
       featured: false,
     },
