@@ -12,7 +12,7 @@ const defaults = {
   offers: [
     {
       name: "Digital Starter",
-      price: "$5",
+      price: "$10",
       description:
         "A practical introduction to structured trading, risk management and psychology.",
       features: [
@@ -21,7 +21,7 @@ const defaults = {
         "Core market-structure concepts",
         "Instant digital access",
       ],
-      cta: "Get the $5 Product",
+      cta: "Get the $10 Product",
       href: "#",
       featured: false,
     },
