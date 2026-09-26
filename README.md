@@ -4,7 +4,7 @@ Next.js landing page for Institutional Trading Academy.
 
 ## Offers
 
-- Digital Starter — $5
+- Digital Starter — $10
 - 3-Month Mentorship — $147
 - 12-Month Mentorship — $497
 
