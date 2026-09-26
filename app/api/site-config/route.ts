@@ -54,7 +54,20 @@ export async function GET() {
     if (!res.ok) return NextResponse.json(defaults);
     const rows = await res.json();
     const config = rows?.[0]?.config;
-    return NextResponse.json(config && typeof config === "object" ? { ...defaults, ...config } : defaults, { headers: { "Cache-Control": "no-store" } });
+    if (!config || typeof config !== "object") {
+      return NextResponse.json(defaults, { headers: { "Cache-Control": "no-store" } });
+    }
+
+    const merged = { ...defaults, ...config };
+    if (Array.isArray(merged.offers) && merged.offers.length > 0) {
+      merged.offers = merged.offers.map((offer: any, index: number) =>
+        index === 0 && offer?.price === "$5"
+          ? { ...offer, price: "$10", cta: "Get the $10 Product" }
+          : offer
+      );
+    }
+
+    return NextResponse.json(merged, { headers: { "Cache-Control": "no-store" } });
   } catch {
     return NextResponse.json(defaults);
   }
