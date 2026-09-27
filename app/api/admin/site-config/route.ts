@@ -29,7 +29,52 @@ export async function GET() {
   }
 
   const rows = await res.json();
-  return NextResponse.json({ config: rows?.[0]?.config ?? {} });
+  const config = rows?.[0]?.config ?? {};
+
+  // Present the current student-program structure in the admin editor
+  // while preserving existing prices and checkout URLs.
+  if (Array.isArray(config.offers) && config.offers.length >= 3) {
+    config.offers = config.offers.map((offer: any, index: number) => {
+      if (index === 1 && ["Base Coaching", "3-Month Mentorship"].includes(offer?.name)) {
+        return {
+          ...offer,
+          name: "3-Month Student Program",
+          description: "A structured 3-month student program for traders ready to build and develop a repeatable process.",
+          features: [
+            "Complete trading framework",
+            "Market structure & liquidity",
+            "Risk management system",
+            "Trading psychology",
+            "Private community",
+            "3 months of student access",
+          ],
+          cta: "Join 3-Month Program",
+          featured: false,
+        };
+      }
+
+      if (index === 2 && ["Premium Coaching", "12-Month Mentorship"].includes(offer?.name)) {
+        return {
+          ...offer,
+          name: "12-Month Student Program",
+          description: "A long-term 12-month student program for traders who want extended guidance, accountability and development.",
+          features: [
+            "Everything in 3-Month Program",
+            "Extended coaching access",
+            "Trade reviews",
+            "Execution feedback",
+            "Advanced accountability",
+          ],
+          cta: "Join 12-Month Program",
+          featured: false,
+        };
+      }
+
+      return offer;
+    });
+  }
+
+  return NextResponse.json({ config });
 }
 
 export async function PUT(req: Request) {
