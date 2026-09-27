@@ -54,35 +54,35 @@ const defaults: Config = {
       featured: false,
     },
     {
-      name: "3-Month Mentorship",
+      name: "3-Month Student Program",
       price: "$147",
       description:
-        "A structured 3-month mentorship program built around trading education, risk management, psychology and disciplined execution.",
+        "A structured 3-month student program for traders ready to build and develop a repeatable process.",
       features: [
         "Complete trading framework",
         "Market structure & liquidity",
         "Risk management system",
         "Trading psychology",
-        "Community access",
-        "Structured 3-month learning path",
+        "Private community",
+        "3 months of student access",
       ],
-      cta: "Join 3-Month Mentorship",
+      cta: "Join 3-Month Program",
       href: "#",
       featured: true,
     },
     {
-      name: "12-Month Mentorship",
+      name: "12-Month Student Program",
       price: "$497",
       description:
-        "A long-term 12-month mentorship program for traders who want more time to develop, practice and refine their process.",
+        "A long-term 12-month student program for traders who want extended guidance, accountability and development.",
       features: [
-        "Everything in 3-Month Mentorship",
-        "Extended 12-month learning path",
-        "Ongoing educational content",
-        "Trading psychology development",
-        "Risk management development",
+        "Everything in 3-Month Program",
+        "Extended coaching access",
+        "Trade reviews",
+        "Execution feedback",
+        "Advanced accountability",
       ],
-      cta: "Join 12-Month Mentorship",
+      cta: "Join 12-Month Program",
       href: "#",
       featured: false,
     },
@@ -96,15 +96,15 @@ const faqs = [
   ],
   [
     "Do I need to buy all three offers?",
-    "No. The $10 product is a standalone entry product. Mentorship is optional.",
+    "No. The $10 product is a standalone entry product. Student programs are optional.",
   ],
   [
-    "How long are the mentorship programs?",
-    "$147 gives you access to the 3-month mentorship program. $497 gives you access to the 12-month mentorship program.",
+    "How long are the student programs?",
+    "$147 gives you access to the 3-month student program. $497 gives you access to the 12-month student program.",
   ],
   [
     "Where do I receive my product?",
-    "Checkout and product delivery will be handled through Chariow.",
+    "Checkout and product delivery are handled through Whop.",
   ],
   [
     "Does this guarantee trading profits?",
@@ -220,14 +220,14 @@ export default function Home() {
               </article>
             ))}
           </div>
-          <p className="checkout-note">All purchases are completed through Chariow. Product links can be changed from the Admin panel.</p>
+          <p className="checkout-note">All purchases are securely processed through Whop. Product links can be managed from the Admin panel.</p>
         </div>
       </section>
 
       <section className="section">
         <div className="container cta">
           <div className="eyebrow">YOUR NEXT MOVE</div><h2>Build the process before you chase the result.</h2>
-          <p>Start with the $10 digital product, or join a structured mentorship program.</p>
+          <p>Start with the $10 digital product, or join a structured student program.</p>
           <a className="button primary" href="#offers">View Programs</a>
         </div>
       </section>
