@@ -20,20 +20,20 @@ const defaults = {
       featured: false,
     },
     {
-      name: "3-Month Mentorship",
+      name: "3-Month Student Program",
       price: "$147",
-      description: "A structured 3-month mentorship program built around trading education, risk management, psychology and disciplined execution.",
-      features: ["Complete trading framework","Market structure & liquidity","Risk management system","Trading psychology","Community access","Structured 3-month learning path"],
-      cta: "Join 3-Month Mentorship",
+      description: "A structured 3-month student program for traders ready to build and develop a repeatable process.",
+      features: ["Complete trading framework","Market structure & liquidity","Risk management system","Trading psychology","Private community","3 months of student access"],
+      cta: "Join 3-Month Program",
       href: "#",
       featured: true,
     },
     {
-      name: "12-Month Mentorship",
+      name: "12-Month Student Program",
       price: "$497",
-      description: "A long-term 12-month mentorship program for traders who want more time to develop, practice and refine their process.",
-      features: ["Everything in 3-Month Mentorship","Extended 12-month learning path","Ongoing educational content","Trading psychology development","Risk management development"],
-      cta: "Join 12-Month Mentorship",
+      description: "A long-term 12-month student program for traders who want extended guidance, accountability and development.",
+      features: ["Everything in 3-Month Program","Extended coaching access","Trade reviews","Execution feedback","Advanced accountability"],
+      cta: "Join 12-Month Program",
       href: "#",
       featured: false,
     },
@@ -59,6 +59,49 @@ export async function GET() {
     }
 
     const merged = { ...defaults, ...config };
+
+    // Migrate the old coaching labels to the current student-program structure
+    // while preserving existing prices and checkout URLs from the saved config.
+    if (Array.isArray(merged.offers) && merged.offers.length >= 3) {
+      merged.offers = merged.offers.map((offer: any, index: number) => {
+        if (index === 1 && ["Base Coaching", "3-Month Mentorship"].includes(offer?.name)) {
+          return {
+            ...offer,
+            name: "3-Month Student Program",
+            description: "A structured 3-month student program for traders ready to build and develop a repeatable process.",
+            features: [
+              "Complete trading framework",
+              "Market structure & liquidity",
+              "Risk management system",
+              "Trading psychology",
+              "Private community",
+              "3 months of student access",
+            ],
+            cta: "Join 3-Month Program",
+            featured: false,
+          };
+        }
+
+        if (index === 2 && ["Premium Coaching", "12-Month Mentorship"].includes(offer?.name)) {
+          return {
+            ...offer,
+            name: "12-Month Student Program",
+            description: "A long-term 12-month student program for traders who want extended guidance, accountability and development.",
+            features: [
+              "Everything in 3-Month Program",
+              "Extended coaching access",
+              "Trade reviews",
+              "Execution feedback",
+              "Advanced accountability",
+            ],
+            cta: "Join 12-Month Program",
+            featured: false,
+          };
+        }
+
+        return offer;
+      });
+    }
     if (Array.isArray(merged.offers) && merged.offers.length > 0) {
       merged.offers = merged.offers.map((offer: any, index: number) =>
         index === 0 && offer?.price === "$5"
