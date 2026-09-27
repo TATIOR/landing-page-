@@ -35,8 +35,8 @@ const defaultConfig: SiteConfig = {
   certificates: [],
   offers: [
     { name: "Digital Starter", price: "$10", description: "A practical introduction to structured trading, risk management and psychology.", features: ["Trading psychology guide", "Risk management framework", "Core market-structure concepts", "Instant digital access"], cta: "Get the $10 Product", href: "#", featured: false },
-    { name: "3-Month Mentorship", price: "$147", description: "A structured 3-month mentorship program built around trading education, risk management, psychology and disciplined execution.", features: ["Complete trading framework", "Market structure & liquidity", "Risk management system", "Trading psychology", "Community access", "Structured 3-month learning path"], cta: "Join 3-Month Mentorship", href: "#", featured: true },
-    { name: "12-Month Mentorship", price: "$497", description: "A long-term 12-month mentorship program for traders who want more time to develop, practice and refine their process.", features: ["Everything in 3-Month Mentorship", "Extended 12-month learning path", "Ongoing educational content", "Trading psychology development", "Risk management development"], cta: "Join 12-Month Mentorship", href: "#", featured: false },
+    { name: "3-Month Student Program", price: "$147", description: "A structured 3-month student program for traders ready to build and develop a repeatable process.", features: ["Complete trading framework", "Market structure & liquidity", "Risk management system", "Trading psychology", "Private community", "3 months of student access"], cta: "Join 3-Month Program", href: "#", featured: true },
+    { name: "12-Month Student Program", price: "$497", description: "A long-term 12-month student program for traders who want extended guidance, accountability and development.", features: ["Everything in 3-Month Program", "Extended coaching access", "Trade reviews", "Execution feedback", "Advanced accountability"], cta: "Join 12-Month Program", href: "#", featured: false },
   ],
 };
 
@@ -188,11 +188,11 @@ export default function Admin() {
         <button className="button ghost" onClick={() => setCfg({ ...cfg, certificates: [...cfg.certificates, { title: "New Proof", url: "" }] })} type="button">+ Add Certificate / Proof</button>
       </section>
 
-      <section className="admin-section"><h2>Chariow Offers</h2>
+      <section className="admin-section"><h2>Whop Offers</h2>
         {cfg.offers.map((o, i) => <div className="edit-offer" key={i}><h3>{o.name}</h3>
           <div className="admin-grid"><label>Name<input value={o.name} onChange={e => editOffer(i, "name", e.target.value)} /></label><label>Price<input value={o.price} onChange={e => editOffer(i, "price", e.target.value)} /></label></div>
           <label>Description<textarea value={o.description} onChange={e => editOffer(i, "description", e.target.value)} /></label>
-          <label>Chariow URL<input value={o.href} onChange={e => editOffer(i, "href", e.target.value)} /></label>
+          <label>Whop Product URL<input value={o.href} onChange={e => editOffer(i, "href", e.target.value)} /></label>
           <label>Button text<input value={o.cta} onChange={e => editOffer(i, "cta", e.target.value)} /></label>
           <label>Features<textarea value={o.features.join("\n")} onChange={e => editOffer(i, "features", e.target.value.split("\n"))} /></label>
         </div>)}
