@@ -1,247 +1,28 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useMemo, useState } from "react";
 
-type Offer = {
-  name: string;
-  price: string;
-  description: string;
-  features: string[];
-  cta: string;
-  href: string;
-  featured: boolean;
-};
-
-type Certificate = {
-  title: string;
-  url: string;
-};
-
-type Config = {
-  heroTitle: string;
-  heroAccent: string;
-  heroCopy: string;
-  audience: string;
-  experience: string;
-  discordUrl: string;
-  certificates: Certificate[];
-  offers: Offer[];
-};
-
-const defaults: Config = {
-  heroTitle: "Stop chasing trades.",
-  heroAccent: "Build a trading process.",
-  heroCopy:
-    "Learn market structure, liquidity, risk management and trading psychology through a structured approach designed to help you execute with discipline.",
-  audience: "14K+",
-  experience: "3+",
-  discordUrl: "https://discord.gg/neGYW7UTC",
-  certificates: [],
-  offers: [
-    {
-      name: "Digital Starter",
-      price: "$10",
-      description:
-        "A practical introduction to structured trading, risk management and psychology.",
-      features: [
-        "Trading psychology guide",
-        "Risk management framework",
-        "Core market-structure concepts",
-        "Instant digital access",
-      ],
-      cta: "Get the $10 Product",
-      href: "#",
-      featured: false,
-    },
-    {
-      name: "3-Month Student Program",
-      price: "$147",
-      description:
-        "A structured 3-month student program for traders ready to build and develop a repeatable process.",
-      features: [
-        "Complete trading framework",
-        "Market structure & liquidity",
-        "Risk management system",
-        "Trading psychology",
-        "Private community",
-        "3 months of student access",
-      ],
-      cta: "Join 3-Month Program",
-      href: "#",
-      featured: true,
-    },
-    {
-      name: "12-Month Student Program",
-      price: "$497",
-      description:
-        "A long-term 12-month student program for traders who want extended guidance, accountability and development.",
-      features: [
-        "Everything in 3-Month Program",
-        "Extended coaching access",
-        "Trade reviews",
-        "Execution feedback",
-        "Advanced accountability",
-      ],
-      cta: "Join 12-Month Program",
-      href: "#",
-      featured: false,
-    },
-  ],
-};
-
-const faqs = [
-  [
-    "Is this for beginners?",
-    "Yes. The material is designed to give beginners a structured foundation while remaining useful for experienced traders who want to improve their process.",
-  ],
-  [
-    "Do I need to buy all three offers?",
-    "No. The $10 product is a standalone entry product. Student programs are optional.",
-  ],
-  [
-    "How long are the student programs?",
-    "$147 gives you access to the 3-month student program. $497 gives you access to the 12-month student program.",
-  ],
-  [
-    "Where do I receive my product?",
-    "Checkout and product delivery are handled through Whop.",
-  ],
-  [
-    "Does this guarantee trading profits?",
-    "No. Trading involves substantial risk. The academy focuses on education, process, risk management and disciplined execution.",
-  ],
+type Product={id:string;name:string;category:string;brand:string;price:number;oldPrice?:number;condition:string;image:string;description:string;specs:string[]};
+const products:Product[]=[
+{id:"t480",name:"ThinkPad T480",category:"Laptops",brand:"Lenovo",price:180000,oldPrice:200000,condition:"Refurbished",image:"https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=1000&q=85",description:"Reliable business laptop for work, study and everyday productivity.",specs:["Core i5","8GB RAM","256GB SSD"]},
+{id:"elitebook",name:"EliteBook 840 G5",category:"Laptops",brand:"HP",price:195000,oldPrice:220000,condition:"Refurbished",image:"https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?auto=format&fit=crop&w=1000&q=85",description:"Premium business notebook with a clean professional design.",specs:["Core i5","8GB RAM","256GB SSD"]},
+{id:"monitor",name:"24-inch Full HD Monitor",category:"Monitors",brand:"TATIOR",price:85000,condition:"New",image:"https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?auto=format&fit=crop&w=1000&q=85",description:"Sharp Full HD display for office work, content and trading.",specs:["24 inch","Full HD","HDMI / VGA"]},
+{id:"ssd",name:"512GB NVMe SSD",category:"Accessories",brand:"Kingston",price:45000,condition:"New",image:"https://images.unsplash.com/photo-1597872200969-2b65d56bd16b?auto=format&fit=crop&w=1000&q=85",description:"Fast storage upgrade for compatible laptops and desktops.",specs:["512GB","NVMe","High speed"]},
+{id:"iphone",name:"iPhone",category:"Phones",brand:"Apple",price:0,condition:"Available on request",image:"https://images.unsplash.com/photo-1592286927505-2fd0f17f2a6f?auto=format&fit=crop&w=1000&q=85",description:"Ask TATIOR for current iPhone models and prices.",specs:["Multiple models","Warranty options","Price on request"]},
+{id:"android",name:"Android Phones",category:"Phones",brand:"Various",price:0,condition:"Available on request",image:"https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=1000&q=85",description:"A selection of Android smartphones available through TATIOR.",specs:["Multiple brands","Multiple budgets","Price on request"]}
 ];
-
-export default function Home() {
-  const [cfg, setCfg] = useState<Config>(defaults);
-  const [menuOpen, setMenuOpen] = useState(false);
-
-  useEffect(() => {
-    fetch("/api/site-config", { cache: "no-store" })
-      .then((response) => response.json())
-      .then((data) => {
-        if (data && typeof data === "object") {
-          setCfg({ ...defaults, ...data });
-        }
-      })
-      .catch(() => {});
-  }, []);
-
-  return (
-    <main>
-      <nav className="nav container">
-        <a className="brand" href="/">
-          <span className="brand-mark">ITA</span>
-          <span>Institutional Trading Academy</span>
-        </a>
-
-        <div className="nav-actions">
-          <a className="nav-link" href="/about">Who I Am</a>
-          <a className="nav-link" href="/register">Create Account</a>
-          <a className="nav-link" href="#offers">Programs</a>
-          <a className="button telegram-button" href={cfg.discordUrl} target="_blank" rel="noreferrer">
-            Join Our Discord
-          </a>
-          <button className="mobile-menu-button" type="button" aria-label={menuOpen ? "Close menu" : "Open menu"} aria-expanded={menuOpen} onClick={() => setMenuOpen((open) => !open)}>
-            <span /><span /><span />
-          </button>
-        </div>
-
-        {menuOpen && (
-          <div className="mobile-menu">
-            <a href="/about" onClick={() => setMenuOpen(false)}>Who I Am</a>
-            <a href="/register" onClick={() => setMenuOpen(false)}>Create Account</a>
-            <a href="#offers" onClick={() => setMenuOpen(false)}>Programs</a>
-            <a className="mobile-telegram" href={cfg.discordUrl} target="_blank" rel="noreferrer" onClick={() => setMenuOpen(false)}>
-              Join Our Discord
-            </a>
-          </div>
-        )}
-      </nav>
-
-      <section className="hero container">
-        <div className="eyebrow">INSTITUTIONAL TRADING ACADEMY</div>
-        <h1>{cfg.heroTitle}<br /><span>{cfg.heroAccent}</span></h1>
-        <p className="hero-copy">{cfg.heroCopy}</p>
-        <div className="hero-actions">
-          <a className="button primary" href="#offers">Explore the Programs</a>
-          <a className="button ghost" href="#method">See the Method</a>
-        </div>
-        <div className="proof">
-          <div><strong>{cfg.audience}</strong><span>social audience</span></div>
-          <div><strong>{cfg.experience}</strong><span>years trading experience</span></div>
-          <div><strong>100%</strong><span>focus on process</span></div>
-        </div>
-      </section>
-
-      <section className="section" id="about">
-        <div className="container two-col">
-          <div><div className="eyebrow">WHO I AM</div><h2>Trader since 2022. Funded since 2023.</h2></div>
-          <div>
-            <p className="hero-copy">I started my trading journey in 2022, studying price action, market structure and the psychology behind execution. In 2023, I began trading funded accounts and have gone through multiple prop-firm programs and evaluations.</p>
-            <p className="hero-copy">Over time, the focus became less about finding another strategy and more about building a repeatable process: controlled risk, patience, journaling and disciplined execution. Institutional Trading Academy was created from that journey to help other traders develop the same foundation.</p>
-            <a className="button ghost" href="/about">Read My Full Story</a>
-          </div>
-        </div>
-      </section>
-
-      <section className="section muted" id="method">
-        <div className="container two-col">
-          <div><div className="eyebrow">THE REAL PROBLEM</div><h2>Most traders don&apos;t need another random strategy.</h2></div>
-          <div className="problem-list">
-            {["Overtrading after a loss","Risking too much on one idea","Changing strategies every week","Chasing payouts instead of process","Trading without a repeatable plan"].map((item) => (
-              <div className="problem" key={item}><span>×</span>{item}</div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="section">
-        <div className="container">
-          <div className="eyebrow">THE FRAMEWORK</div><h2>A system built around six pillars.</h2>
-          <div className="pillars">
-            {["Market Structure","Liquidity & Price Action","Entries & Execution","Risk Management","Trading Psychology","Journaling & Review"].map((item, index) => (
-              <div className="pillar" key={item}><span>{String(index + 1).padStart(2, "0")}</span><h3>{item}</h3><p>Understand the principle, define the rules and execute consistently.</p></div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="section muted" id="offers">
-        <div className="container">
-          <div className="eyebrow">CHOOSE YOUR LEVEL</div><h2>Start where you are. Go deeper when you&apos;re ready.</h2>
-          <div className="offers">
-            {cfg.offers.map((offer) => (
-              <article className={offer.featured ? "offer featured" : "offer"} key={offer.name}>
-                {offer.featured && <div className="badge">MOST POPULAR</div>}
-                <div className="offer-name">{offer.name}</div><div className="price">{offer.price}</div><p>{offer.description}</p>
-                <ul>{offer.features.map((feature) => <li key={feature}>✓ {feature}</li>)}</ul>
-                <a className={offer.featured ? "button primary full" : "button ghost full"} href={offer.href}>{offer.cta}</a>
-              </article>
-            ))}
-          </div>
-          <p className="checkout-note">All purchases are securely processed through Whop. Product links can be managed from the Admin panel.</p>
-        </div>
-      </section>
-
-      <section className="section">
-        <div className="container cta">
-          <div className="eyebrow">YOUR NEXT MOVE</div><h2>Build the process before you chase the result.</h2>
-          <p>Start with the $10 digital product, or join a structured student program.</p>
-          <a className="button primary" href="#offers">View Programs</a>
-        </div>
-      </section>
-
-      <section className="section muted">
-        <div className="container faq">
-          <div className="eyebrow">FAQ</div><h2>Questions before you start.</h2>
-          {faqs.map(([question, answer]) => <details key={question}><summary>{question}</summary><p>{answer}</p></details>)}
-        </div>
-      </section>
-
-      <footer className="footer container">
-        <span>© {new Date().getFullYear()} Institutional Trading Academy</span><span>Education • Process • Discipline</span>
-      </footer>
-    </main>
-  );
+const categories=["All","Laptops","Phones","Monitors","Accessories"];
+const money=(n:number)=>n?new Intl.NumberFormat("fr-FR").format(n)+" FCFA":"Sur demande";
+const wa=(p:Product)=>"https://wa.me/237000000000?text="+encodeURIComponent(`Bonjour TATIOR, je suis intéressé par: ${p.name}. Pouvez-vous confirmer la disponibilité et le prix ?`);
+export default function Home(){
+ const[category,setCategory]=useState("All"),[query,setQuery]=useState("");
+ const filtered=useMemo(()=>products.filter(p=>(category==="All"||p.category===category)&&`${p.name} ${p.brand} ${p.category}`.toLowerCase().includes(query.toLowerCase())),[category,query]);
+ return <main>
+  <header className="site-header"><div className="container header-inner"><a href="/" className="logo">TATIOR</a><div className="search"><span>⌕</span><input value={query} onChange={e=>setQuery(e.target.value)} placeholder="Rechercher un produit..." /></div><div className="header-actions"><a href="#products" className="header-link">Produits</a><a href="#contact" className="whatsapp-top">WhatsApp</a></div></div><div className="category-bar"><div className="container categories">{categories.map(c=><button key={c} className={category===c?"active":""} onClick={()=>setCategory(c)}>{c}</button>)}</div></div></header>
+  <section className="hero-shop"><div className="container hero-grid"><div className="hero-copy-shop"><div className="kicker">TATIOR · TECHNOLOGY</div><h1>Technology<br/><em>that works.</em></h1><p>Laptops, phones, accessories and technology selected for work, study and everyday life.</p><div className="hero-buttons"><a className="btn gold" href="#products">Voir les produits</a><a className="btn outline" href="#contact">Parler à TATIOR</a></div><div className="mini-proof"><span><b>✓</b> Produits testés</span><span><b>✓</b> Assistance humaine</span><span><b>✓</b> Achat local</span></div></div><div className="hero-visual"><div className="hero-card"><span>TATIOR</span><strong>YOUR<br/>TECH.<br/><i>SIMPLIFIED.</i></strong><small>SELECTED TECHNOLOGY</small></div></div></div></section>
+  <section id="products" className="products-section"><div className="container"><div className="section-head"><div><div className="kicker">CATALOGUE</div><h2>Find your next device.</h2></div><span>{filtered.length} produits</span></div><div className="product-grid">{filtered.map(p=><article className="product-card" key={p.id}><div className="product-image"><img src={p.image} alt={p.name}/><span>{p.condition}</span></div><div className="product-body"><div className="product-meta"><span>{p.brand}</span><span>{p.category}</span></div><h3>{p.name}</h3><p>{p.description}</p><div className="specs">{p.specs.map(s=><span key={s}>{s}</span>)}</div><div className="product-bottom"><div><strong>{money(p.price)}</strong>{p.oldPrice&&<del>{money(p.oldPrice)}</del>}</div><a href={wa(p)} target="_blank" rel="noreferrer" className="buy">Acheter ↗</a></div></div></article>)}</div></div></section>
+  <section className="trust-section"><div className="container trust-grid"><div><b>01</b><h3>Tested before sale</h3><p>We focus on products that are checked before they reach you.</p></div><div><b>02</b><h3>Clear communication</h3><p>Confirm availability, condition and price directly with TATIOR.</p></div><div><b>03</b><h3>Human support</h3><p>Need advice? Tell us what you need and we help you choose.</p></div></div></section>
+  <section id="contact" className="contact-section"><div className="container contact-box"><div><div className="kicker">NEED SOMETHING?</div><h2>Tell us what<br/>you&apos;re looking for.</h2></div><div><p>Send us your budget, preferred device or exact model. We&apos;ll check availability and get back to you.</p><a className="btn gold" href={wa({name:"un produit",category:"",brand:"",price:0,condition:"",image:"",description:"",specs:[]})} target="_blank" rel="noreferrer">Contact TATIOR on WhatsApp ↗</a></div></div></section>
+  <footer><div className="container footer-inner"><a className="logo" href="/">TATIOR</a><span>Technology · Electronics · More</span><span>© {new Date().getFullYear()} TATIOR</span></div></footer>
+ </main>
 }
