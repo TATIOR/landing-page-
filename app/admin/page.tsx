@@ -1,11 +1,11 @@
 "use client";
-import {useState} from "react";
+import { useState, type FormEvent } from "react";
 type P={name:string;category:string;brand:string;price:string;oldPrice:string;stock:string;condition:string;image:string;description:string;specs:string};
 const blank:P={name:"",category:"Laptops",brand:"",price:"",oldPrice:"",stock:"",condition:"New",image:"",description:"",specs:""};
 export default function Admin(){
  const[p,setP]=useState<P>(blank),[saved,setSaved]=useState(false);
  const set=(k:keyof P,v:string)=>setP({...p,[k]:v});
- function save(e:React.FormEvent){e.preventDefault();setSaved(true);setTimeout(()=>setSaved(false),2500)}
+ function save(e: FormEvent<HTMLFormElement>){e.preventDefault();setSaved(true);setTimeout(()=>setSaved(false),2500)}
  return <main className="admin-page"><div className="admin-shell">
   <div className="admin-head"><div><div className="kicker">TATIOR · ADMIN</div><h1>Catalogue manager</h1><p>Add products, prices, stock and photos. This panel is the foundation for the live catalogue.</p></div><a className="btn outline" href="/">View TATIOR</a></div>
   <section className="admin-section"><h2>New product</h2><form onSubmit={save}>
